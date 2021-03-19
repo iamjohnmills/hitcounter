@@ -6,6 +6,9 @@ const port = process.env.PORT || 8080;
 (async () => {
   const getHitsData = () => {
     const hits_file = 'hits.txt'
+    if (!fs.existsSync(hits_file)) {
+      fs.writeFileSync(hits_file, '0');
+    }
     let hits;
     hits = parseInt(fs.readFileSync(hits_file, 'utf8')) + 1;
     fs.writeFileSync(hits_file, hits.toString());
